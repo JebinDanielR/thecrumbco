@@ -1,0 +1,287 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Classic Brownie",
+      "desc": "A rich, fudgy chocolate brownie with a crisp top and gooey center—pure classic indulgence",
+      "price": "100",
+      "img": "classicbrownie.jpg"
+    },
+    {
+      "id": "2",
+      "name": "Coffee Brownie",
+      "desc": "A decadent chocolate brownie infused with bold coffee flavor for a rich, mocha-style treat",
+      "price": "130",
+      "img": "coffeebrownie.jpg"
+    },
+    {
+      "id": "3",
+      "name": "Choco-Chip Cookie",
+      "desc": "Crispy on the edges, chewy in the center, loaded with melty chocolate chips in every bite",
+      "price": "40",
+      "img": "chocochipcookies.jpg"
+    },
+    {
+      "id": "4",
+      "name": "Coffee-Bean Cookie",
+      "desc": "Crunchy coffee bean cookies bursting with bold espresso flavor and a hint of sweetness",
+      "price": "55",
+      "img": "coffeecookies.jpg"
+    },
+    {
+      "id": "5",
+      "name": "Vanilla Cupcake",
+      "desc": "Light and airy vanilla cupcake topped with smooth, buttery vanilla frosting—a timeless classic",
+      "price": "60",
+      "img": "vanillacupcake.jpg"
+    },
+    {
+      "id": "6",
+      "name": "Chocolate Cupcake",
+      "desc": "Moist and fluffy chocolate cupcakes topped with rich, creamy chocolate frosting for a perfect bite-sized indulgence",
+      "price": "80",
+      "img": "chococupcake.jpg"
+    },
+    {
+      "id": 1751433702398,
+      "name": "Vanilla Cookie",
+      "desc": "A crisp and buttery vanilla cookie with a delicate sweetness and melt-in-the-mouth texture",
+      "price": 45,
+      "img": "vanillacookie.jpg"
+    },
+    {
+      "id": 1751434585847,
+      "name": "Chocolate Croissant",
+      "desc": "A flaky, buttery croissant filled with rich, velvety chocolate—perfectly crisp on the outside and decadently gooey inside",
+      "price": 150,
+      "img": "chococroissant.jpg"
+    },
+    {
+      "id": 1751435749871,
+      "name": "Butter Croissant",
+      "desc": "A golden, flaky butter croissant with a tender, airy interior and rich, buttery flavor in every bite",
+      "price": 130,
+      "img": "buttercroissant.jpg"
+    },
+    {
+      "id": 1751440666197,
+      "name": "Coconut Fudge Brownie",
+      "desc": "A dense, fudgy brownie layered with sweet coconut for a rich, tropical twist on a chocolate classic",
+      "price": 150,
+      "img": "cocofudgebrownie.jpg"
+    },
+    {
+      "id": 1751458216397,
+      "name": "Coconut Fudge Brownie",
+      "desc": "A dense, fudgy brownie layered with sweet coconut for a rich, tropical twist on a chocolate classic",
+      "price": 140,
+      "img": "cocofudgebrownie.jpg"
+    },
+    {
+      "id": 1751526411076,
+      "name": "Vanilla Brownie",
+      "desc": "A dense, fudgy brownie layered with sweet coconut for a rich, tropical twist on a chocolate classic",
+      "price": 54,
+      "img": "cocofudgebrownie.jpg"
+    },
+    {
+      "id": 1752217619020,
+      "name": "Chocolate Macaroons",
+      "desc": "Chewy and rich chocolate macaroons, packed with coconut and dipped in decadent dark chocolate",
+      "price": 60,
+      "img": "chocomacaroons.jpg"
+    },
+    {
+      "id": 1752222594704,
+      "name": "Rose-milk Macaroons",
+      "desc": "Delicately chewy rosemilk macaroons infused with fragrant rose essence and a hint of creamy sweetness",
+      "price": 75,
+      "img": "rosemilkmacaroons.jpg"
+    }
+  ],
+  "customers": [
+    {
+      "id": 1750247707564,
+      "name": "Jebin Daniel R",
+      "email": "jebinderil@gmail.com",
+      "password": "w1235@Wfghh",
+      "enrolledCourses": []
+    },
+    {
+      "id": 1750400796583,
+      "name": "Foodmine",
+      "email": "jebinderil@gmail.com",
+      "password": "123445678!A",
+      "enrolledCourses": []
+    },
+    {
+      "id": 1750400998197,
+      "name": "Jebin Daniel R",
+      "email": "jebinderil@gmail.com",
+      "password": "dsdfdA@124",
+      "enrolledCourses": []
+    },
+    {
+      "id": 1750402268042,
+      "name": "Jebin Daniel R",
+      "email": "jebinderil@gmail.com",
+      "password": "dgfgh%rfA566",
+      "enrolledCourses": []
+    },
+    {
+      "id": 1750403338015,
+      "name": "Jebin Daniel R",
+      "email": "jebinderil@gmail.com",
+      "password": "A@23456erth",
+      "enrolledCourses": []
+    },
+    {
+      "id": 1750404158816,
+      "name": "Jebin Daniel R",
+      "email": "jebinderil@gmail.com",
+      "password": "Jebin@2002",
+      "enrolledCourses": []
+    },
+    {
+      "id": 1750410859267,
+      "name": "Jebin Daniel R",
+      "email": "jebinderil@gmail.com",
+      "password": "Jebin@233221",
+      "enrolledCourses": []
+    },
+    {
+      "id": 1750839269884,
+      "name": "Jebin Daniel R",
+      "email": "jebinderil@gmail.com",
+      "password": "Jevun@242",
+      "enrolledCourses": []
+    },
+    {
+      "id": 1750845852750,
+      "name": "Jebin Daniel R",
+      "email": "jebinderil@gmail.com",
+      "password": "dfghj34567@WE",
+      "enrolledCourses": []
+    },
+    {
+      "id": 1750850518905,
+      "name": "Jebin Daniel R",
+      "email": "jebinderil@gmail.com",
+      "password": "@E443dxx",
+      "enrolledCourses": []
+    },
+    {
+      "id": 1750850702954,
+      "name": "Jebin Daniel R",
+      "email": "jebinderil@gmail.com",
+      "password": "Jebin@2332",
+      "enrolledCourses": []
+    },
+    {
+      "id": 1750850813500,
+      "name": "Jebin Daniel R",
+      "email": "jebinderil@gmail.com",
+      "password": "Jev@35f5",
+      "enrolledCourses": []
+    },
+    {
+      "id": 1750850963364,
+      "name": "Jebin Daniel R",
+      "email": "jebinderil@gmail.com",
+      "password": "Jebin@2002",
+      "enrolledCourses": []
+    },
+    {
+      "id": 1750851126057,
+      "name": "Jebin Daniel R",
+      "email": "jebinderil@gmail.com",
+      "password": "Jebin@3545",
+      "enrolledCourses": []
+    },
+    {
+      "id": 1750851337280,
+      "name": "Jebin Daniel R",
+      "email": "jebinderil@gmail.com",
+      "password": "@R45rffde",
+      "enrolledCourses": []
+    },
+    {
+      "id": 1750851837349,
+      "name": "Jebin Daniel R",
+      "email": "jebinderil@gmail.com",
+      "password": "Jebin@233",
+      "enrolledCourses": []
+    },
+    {
+      "id": 1750851864857,
+      "name": "Jebin Daniel R",
+      "email": "jebinderil@gmail.com",
+      "password": "Jebin@23hu",
+      "enrolledCourses": []
+    },
+    {
+      "id": 1750851883572,
+      "name": "Jebin Daniel R",
+      "email": "jebinderil@gmail.com",
+      "password": "G2e@23rg",
+      "enrolledCourses": []
+    },
+    {
+      "id": 1750852084518,
+      "name": "Jebin Daniel R",
+      "email": "jebinderil@gmail.com",
+      "password": "Jebin@232",
+      "enrolledCourses": []
+    },
+    {
+      "id": 1750852618916,
+      "name": "Jebin Daniel R",
+      "email": "jebinderil@gmail.com",
+      "password": "Jebin@2992",
+      "enrolledCourses": []
+    },
+    {
+      "id": 1750852751341,
+      "name": "Jebin Daniel R",
+      "email": "jebinderil@gmail.com",
+      "password": "Jeb@@3r55",
+      "enrolledCourses": []
+    },
+    {
+      "id": 1750852979634,
+      "name": "Jebin Daniel R",
+      "email": "jebinderil@gmail.com",
+      "password": "Jebi@223",
+      "enrolledCourses": []
+    },
+    {
+      "id": 1750853957540,
+      "name": "Jebin Daniel R",
+      "email": "jebinderil@gmail.com",
+      "password": "@J23edbh",
+      "enrolledCourses": []
+    },
+    {
+      "id": 1751350714437,
+      "name": "Jebin Daniel R",
+      "email": "jebinderil@gmail.com",
+      "password": "Jebin@2443",
+      "enrolledCourses": []
+    },
+    {
+      "id": 1751440208802,
+      "name": "Sam Deril",
+      "email": "samderil2005@gmail.com",
+      "password": "Sam@2005",
+      "enrolledCourses": []
+    },
+    {
+      "id": 1751458187053,
+      "name": "Jebin Daniel R",
+      "email": "jebinderil@gmail.com",
+      "password": "Jebin@2002",
+      "enrolledCourses": []
+    }
+  ],
+  "cart": []
+}

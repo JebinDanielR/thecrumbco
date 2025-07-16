@@ -1,0 +1,50 @@
+<div class="cart-container">
+  
+  <!-- Left Side - Cart Items -->
+  <div class="cart-items-section">
+    <h2>Your Cart</h2>
+    
+    <!-- Cart Items List -->
+    @if (cartItems.length > 0) {
+      @for (item of cartItems; track item.id) {
+        <div class="cart-item">
+          <img [src]="item.img" alt="{{item.name}}" />
+          <div class="cart-details">
+            <h3>{{ item.name }}</h3>
+            <p>{{ item.desc }}</p>
+      
+            <div class="cart-meta">
+              <span class="price">{{ item.price | currency:'INR' }}</span>
+              <div class="qty-controls">
+                <button (click)="decreaseQty(item)">−</button>
+                <span>{{ item.qty }}</span>
+                <button (click)="increaseQty(item)">+</button>
+              </div>
+              <button class="remove-btn" (click)="removeItem(item.id)">Remove</button>
+            </div>
+          </div>
+        </div>
+      }
+    } @else {
+      <div class="empty-cart">
+        <h3>Your cart is empty</h3>
+        <p>Add some delicious items to get started!</p>
+        <button class="view-products-btn" (click)="goToProducts()">View Products</button>
+      </div>
+    }
+  </div>
+
+  <!-- Right Side - Cart Summary -->
+  <div class="cart-summary">
+    <h3>Total: {{ total | currency:'INR':'symbol' }}</h3>
+    
+    @if (cartItems.length > 0) {
+      <nav>
+        <a (click)="goToCheckout()">
+          Proceed to Checkout
+        </a>
+      </nav>
+    }
+  </div>
+
+</div>

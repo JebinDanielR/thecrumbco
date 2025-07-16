@@ -1,0 +1,52 @@
+<div class="home-container">
+
+  <!-- 🌟 Brand Header -->
+  <header class="header">
+    <h1 class="brand-name">The Crumb Co.</h1>
+  </header>
+
+  <!-- 🎞️ Carousel Section -->
+  <div class="carousel"
+       (mouseenter)="stopAutoSlide()"
+       (mouseleave)="startAutoSlide()">
+    <img [src]="carouselImages[currentIndex]" alt="carousel image" />
+    <button class="prev" (click)="onManualNavigation('prev')">‹</button>
+    <button class="next" (click)="onManualNavigation('next')">›</button>
+
+    <!-- Carousel Indicators -->
+    <div class="carousel-indicators">
+      @for (image of carouselImages; track $index) {
+        <button 
+          class="indicator"
+          [class.active]="$index === currentIndex"
+          (click)="goToSlide($index)">
+        </button>
+      }
+    </div>
+  </div>
+
+  <!-- 🍪 Product Categories -->
+  <section class="features">
+    <div class="feature">
+      <img src="classicbrownie.jpg" alt="Brownie" />
+      <h3>Brownies</h3>
+      <p>Rich, fudgy and freshly baked every day.</p>
+    </div>
+    <div class="feature">
+      <img src="chococupcake.jpg" alt="Cupcake" />
+      <h3>Cupcakes</h3>
+      <p>Moist cupcakes topped with creamy frostings.</p>
+    </div>
+    <div class="feature">
+      <img src="coffeecookies.jpg" alt="Cookie" />
+      <h3>Cookies</h3>
+      <p>Classic and chewy, with a touch of crunch.</p>
+    </div>
+  </section>
+
+  <!-- 🛒 CTA Button -->
+  <div class="cta">
+    <a (click)="goToProducts()">View Products</a>
+  </div>
+
+</div>

@@ -1,0 +1,12 @@
+<div class="favorites-list">
+    @for (item of favoriteItems; track item.id) {
+      <div class="product-item">
+        <img [src]="item.img" alt="">
+        <h3>{{ item.name }}</h3>
+        <p>{{ item.desc }}</p>
+        <p>{{ item.price | currency:'INR' }}</p>
+        <button (click)="removeFromFavorites(item.id)">Remove</button>
+      </div>
+    }
+  </div>
+  

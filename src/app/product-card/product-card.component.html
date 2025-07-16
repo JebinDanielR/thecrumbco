@@ -1,0 +1,15 @@
+<div class="product-item">
+    <img [src]="product.img" alt="">
+    <h3>{{product.name}}</h3>
+    <p>{{product.desc}}</p>
+    <p>{{product.price | currency:'INR':'symbol':'1.2-2'}}</p>
+    <button (click)="addToCart()">Add to Cart</button>
+
+    <button class="favorite-btn" (click)="toggleFavorite()">
+        @if (isFavorite) {
+          <span class="filled">❤️</span>
+        } @else {
+          <span>🩶</span>
+        }
+      </button>
+</div>

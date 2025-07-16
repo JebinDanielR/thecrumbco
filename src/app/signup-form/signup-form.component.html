@@ -1,0 +1,67 @@
+<h2>Sign Up Form</h2>
+
+<form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input id="name" type="text" formControlName="name" />
+    @if(name?.invalid && name?.dirty || name?.touched) {
+      <div class="error">
+        @if(name?.errors?.['required']) {
+          <p>Name is required</p>
+        }
+        @if(name?.errors?.['minlength']) {
+          <p>Must be 3 characters</p>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input id="email" type="email" formControlName="email" />
+    @if(email?.invalid && email?.dirty || email?.touched) {
+      <div class="error">
+        @if(email?.errors?.['required']) {
+          <p>Email is required</p>
+        }
+        @if(email?.errors?.['email']) {
+          <p>Enter a valid email</p>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="form-group">
+    <label for="password">Password:</label>
+    <input id="password" type="password" formControlName="password" />
+    @if(password?.invalid && password?.dirty || password?.touched) {
+      <div class="error">
+        @if(password?.errors?.['required']) {
+          <p>Password is required</p>
+        }
+        @if(password?.errors?.['minlength']) {
+          <p>Must be 8 characters</p>
+        }
+        @if(password?.errors?.['pattern']){
+          <p>Passwords must contain: a minimum of 1 special character, at least 1 upper case and numeric</p>
+        }
+      </div>
+    }
+  </div>
+
+  <button type="submit" [disabled]="signUpForm.invalid">Sign Up</button>
+
+  @if (submissionSuccess) {
+    <div class="success brown-theme-popup">
+      <p>Signed Up Successfully!</p>
+      <p class="tagline">You’re now a crumb closer to sweetness 🍪</p>
+      <button (click)="goToHome()">Go to Home</button>
+    </div>
+  }
+
+  @if (submissionError) {
+    <div class="error">
+      <p>{{submissionError}}</p>
+    </div>
+  }
+</form>

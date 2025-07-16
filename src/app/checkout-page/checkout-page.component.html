@@ -1,0 +1,55 @@
+<div class="checkout-container">
+    <h2>Checkout</h2>
+  
+    <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+      <div class="form-section">
+        <label>Full Name:</label>
+        <input type="text" formControlName="name" required />
+  
+        <label>Email:</label>
+        <input type="email" formControlName="email" required />
+  
+        <label>Phone Number:</label>
+        <input type="tel" formControlName="phone" required />
+  
+        <label>Address:</label>
+        <textarea rows="3" formControlName="address" required></textarea>
+  
+        <label>City:</label>
+        <input type="text" formControlName="city" required />
+  
+        <label>Pincode:</label>
+        <input type="text" formControlName="pincode" required />
+      </div>
+  
+      <div class="order-summary">
+        <h3>Order Summary</h3>
+        @for (item of cartItems; track item.id) {
+          <div class="summary-item">
+            <span>{{ item.name }} x {{ item.qty }}</span>
+            <span>₹{{ item.price}} * {{item.qty }}</span>
+          </div>
+        }
+        <div class="summary-total">
+          <strong>Total:</strong>
+          <strong>₹{{ total }}</strong>
+        </div>
+      </div>
+  
+      <button class="place-order-btn" type="submit" [disabled]="checkoutForm.invalid">
+        Place Order
+      </button>
+    </form>
+  
+    <!-- ✅ Show this only after successful form submission -->
+    @if (orderPlaced) {
+      <div class="popup-overlay">
+        <div class="popup">
+          <h2>Order Placed Successfully 🎉</h2>
+          <p>Thank you for ordering from The Crumb Co.</p>
+          <button (click)="closePopup()">Go to Home</button>
+        </div>
+      </div>
+    }
+  </div>
+  
