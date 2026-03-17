@@ -6,6 +6,7 @@ import { FavoritesComponent } from './favorites/favorites.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ProductsComponent } from './products/products.component';
 import { SignupFormComponent } from './signup-form/signup-form.component';
+import { ChatbotComponent } from './chatbot/chatbot.component';
 
 export const routes: Routes = [
     {path: '',redirectTo:'thecrumbco',pathMatch:'full'},
@@ -17,6 +18,7 @@ export const routes: Routes = [
     {path:'thecrumbco/about',component:AboutPageComponent},
     {path:'thecrumbco/favorites',component:FavoritesComponent},
     {path:'thecrumbco/signup',component:SignupFormComponent},
+    {path:'thecrumbco/crumbcoassistant',component:ChatbotComponent},
     // {path:'thecrumbco/cart', loadChildren: () => import('./features/cart/cart.module').then(m => m.CartModule)}
     {path:'thecrumbco/admin', loadChildren: () => import('./features/admin/admin.module').then(m => m.AdminModule)}
 

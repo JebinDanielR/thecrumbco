@@ -1,7 +1,7 @@
-import { CommonModule, CurrencyPipe } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CommonModule, CurrencyPipe, isPlatformBrowser } from '@angular/common';
+import { Component, EventEmitter, Input, OnInit, Output, Inject, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
-import { Product } from '../models/product.model';
+// import { Product } from '../models/product.model';
 import { CartService } from '../services/cart.service';
 
 @Component({
@@ -18,30 +18,34 @@ export class ProductCardComponent implements OnInit {
     this.loadFavoriteStatus();
   }
 
-constructor(private cartService: CartService, router:Router) {}
+constructor(private cartService: CartService, router:Router, @Inject(PLATFORM_ID) private platformId: Object) {}
 
 
 loadFavoriteStatus() {
-  const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-  this.isFavorite = favorites.some((item: any) => item.id === this.product.id);
+  if (isPlatformBrowser(this.platformId)) {
+    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    this.isFavorite = favorites.some((item: any) => item.id === this.product.id);
+  }
 }
 
 toggleFavorite() {
-  let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+  if (isPlatformBrowser(this.platformId)) {
+    let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
 
-  const index = favorites.findIndex((item: any) => item.id === this.product.id);
+    const index = favorites.findIndex((item: any) => item.id === this.product.id);
 
-  if (index > -1) {
-    // Remove from favorites
-    favorites.splice(index, 1);
-    this.isFavorite = false;
-  } else {
-    // Add to favorites
-    favorites.push(this.product);
-    this.isFavorite = true;
+    if (index > -1) {
+      // Remove from favorites
+      favorites.splice(index, 1);
+      this.isFavorite = false;
+    } else {
+      // Add to favorites
+      favorites.push(this.product);
+      this.isFavorite = true;
+    }
+
+    localStorage.setItem('favorites', JSON.stringify(favorites));
   }
-
-  localStorage.setItem('favorites', JSON.stringify(favorites));
 }
 
   addToCart() {

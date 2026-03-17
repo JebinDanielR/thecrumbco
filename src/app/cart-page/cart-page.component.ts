@@ -23,7 +23,10 @@ export class CartPageComponent {
   }
 
   loadCart() {
-    this.cartItems = this.cartService.getCartItems();
+    // this.cartItems = this.cartService.getCartItems();
+    this.cartService.cart$.subscribe(items => {
+  this.cartItems = items;
+});
     this.total = this.cartService.getTotalPrice();
   }
 
