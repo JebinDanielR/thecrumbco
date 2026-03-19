@@ -210,12 +210,25 @@ def chatbot_response(query):
     number = int(number_match.group()) if number_match else None
 
     # 🔍 Dynamic Categories from DB (extract last word of each name)
-    dynamic_categories = set(p["name"].split()[-1].lower() for p in products)
+    dynamic_categories = set(normalize_word(p["name"].split()[-1]) for p in products)
+
     category = None
+    query_words_norm = [normalize_word(w) for w in query_lower.split()]
+
     for cat in dynamic_categories:
-        if cat in query_lower:
+        if cat in query_words_norm:
             category = cat
             break
+    # 🔥 Handle "cupcakes" → show all cupcakes directly
+    if len(query_lower.split()) == 1 and category:
+        results = [
+            p for p in products
+            if normalize_word(p["name"].split()[-1]) == category
+        ]
+
+        response["reply"] = item_count_reply(len(results), category)
+        response["products"] = results
+        return response
 
     # 🔍 Search by specific names, categories, or keywords (like 'coffee')
     results = []
@@ -231,7 +244,7 @@ def chatbot_response(query):
     elif product_matches:
         results = product_matches
     elif category:
-        results = [p for p in products if category in p["name"].lower()]
+        results = [p for p in products if normalize_word(p["name"].split()[-1]) == category]
     elif any(kw in query_lower for kw in ["all", "everything", "shop", "items", "dish", "dessert", "cheap", "under", "above", "price", "expensive"]):
         # If no category but price filter or general browse, start with all products
         results = list(products)
@@ -253,6 +266,16 @@ def chatbot_response(query):
                     seen_ids.add(p["id"])
             results = unique_results
 
+    # 🔥 Smart keyword filtering (chocolate, coffee, etc.)
+    query_words_clean = [w for w in query_lower.split() if len(w) > 2]
+
+    if results:
+        keyword_filtered = []
+        for p in results:
+            if any(word in p["name"].lower() or word in p.get("desc", "").lower() for word in query_words_clean):
+                keyword_filtered.append(p)
+        if keyword_filtered:
+            results = keyword_filtered
     # 💰 Price filtering
     if results and (number or "expensive" in query_lower or "cheap" in query_lower):
         # Avoid filtering if they asked for a specific product by name (like "Add 1 Brownie")
@@ -266,6 +289,23 @@ def chatbot_response(query):
             elif "cheap" in query_lower:
                 results = [p for p in results if int(p["price"]) <= 60]
     
+    # 🥚 Eggless filter
+    if "eggless" in query_lower:
+        results = [
+            p for p in results
+            if "eggless" in p["name"].lower() or "eggless" in p.get("desc", "").lower()
+        ]
+
+    # 💎 Cheapest / Expensive logic
+    if results:
+        if "cheapest" in query_lower or "lowest" in query_lower:
+            min_price = min(int(p["price"]) for p in results)
+            results = [p for p in results if int(p["price"]) == min_price]
+
+        elif "expensive" in query_lower or "premium" in query_lower:
+            max_price = max(int(p["price"]) for p in results)
+            results = [p for p in results if int(p["price"]) == max_price]
+
     # 🧠 Product replies with correct singular/plural
     # REFINED ADD LOGIC: Only add if it's a SPECIFIC product match, not just a category
     is_add_intent = "add" in query_lower or "cart" in query_lower
