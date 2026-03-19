@@ -27,17 +27,26 @@ function saveData(data) {
   =============
 */
 
-// Get all courses
+// Get all products (with optional filtering)
 app.get('/products', (req, res) => {
     const data = loadData();
-    res.json(data.products);
+    let filteredProducts = data.products;
+    
+    // Simple query filtering (e.g. ?name=cookie)
+    Object.keys(req.query).forEach(key => {
+        filteredProducts = filteredProducts.filter(p => 
+            p[key] && p[key].toString().toLowerCase().includes(req.query[key].toLowerCase())
+        );
+    });
+    
+    res.json(filteredProducts);
 });
 
 // Get a course by ID
 app.get('/products/:id', (req, res) => {
     const data = loadData();
-    const productId = parseInt(req.params.id, 10);
-    const product = data.products.find(p => p.id === productId);
+    const productId = req.params.id;
+    const product = data.products.find(p => p.id.toString() === productId.toString());
     if (product) {
         res.json(product);
     } else {
@@ -45,15 +54,45 @@ app.get('/products/:id', (req, res) => {
     }
 });
 
-// Add a new course
+// Add a new product
 app.post('/products', (req, res) => {
     const data = loadData();
     const newProduct = req.body;
-    // Simple ID generation if needed
-    newProduct.id = Date.now();
+    // Simple ID generation
+    newProduct.id = Date.now().toString();
     data.products.push(newProduct);
     saveData(data);
     res.status(201).json(newProduct);
+});
+
+// Update a product
+app.put('/products/:id', (req, res) => {
+    const data = loadData();
+    const productId = req.params.id;
+    const index = data.products.findIndex(p => p.id.toString() === productId.toString());
+    
+    if (index !== -1) {
+        data.products[index] = { ...data.products[index], ...req.body };
+        saveData(data);
+        res.json(data.products[index]);
+    } else {
+        res.status(404).json({ error: 'Product not found' });
+    }
+});
+
+// Delete a product
+app.delete('/products/:id', (req, res) => {
+    const data = loadData();
+    const productId = req.params.id;
+    const newProducts = data.products.filter(p => p.id.toString() !== productId.toString());
+    
+    if (newProducts.length !== data.products.length) {
+        data.products = newProducts;
+        saveData(data);
+        res.json({ message: 'Product deleted successfully' });
+    } else {
+        res.status(404).json({ error: 'Product not found' });
+    }
 });
 
 /* 
@@ -62,10 +101,27 @@ app.post('/products', (req, res) => {
   =============
 */
 
-// Get all students
+// Get all customers (with optional filtering)
 app.get('/customers', (req, res) => {
     const data = loadData();
-    res.json(data.customers);
+    let filteredCustomers = data.customers;
+
+    // Support for login filtering (email & password)
+    if (req.query.email && req.query.password) {
+        const user = data.customers.find(c => 
+            c.email === req.query.email && c.password === req.query.password
+        );
+        return res.json(user ? [user] : []);
+    }
+
+    // Generic query filtering
+    Object.keys(req.query).forEach(key => {
+        filteredCustomers = filteredCustomers.filter(c => 
+            c[key] && c[key].toString() === req.query[key]
+        );
+    });
+
+    res.json(filteredCustomers);
 });
 
 // Add a new student
@@ -98,9 +154,9 @@ app.post('/customers/:customerId/products', (req, res) => {
         return res.status(404).json({ error: 'Product not found' });
     }
 
-    // Add courseId to enrolledCourses if not already there
-    if (!customer.enrolledProducts.includes(productId)) {
-        customer.enrolledProducts.push(productId);
+    // Add productId to enrolledCourses if not already there
+    if (!customer.enrolledCourses.includes(productId)) {
+        customer.enrolledCourses.push(productId);
         saveData(data);
     }
 
@@ -112,11 +168,39 @@ app.get('/products/:id/customers', (req, res) => {
     const data = loadData();
     const productId = parseInt(req.params.id, 10);
 
-    const enrolledcustomers = data.customers.filter((customer) =>
-    customer.enrolledProducts && customer.enrolledProducts.includes(productId)
+    const enrolledCustomers = data.customers.filter((customer) =>
+    customer.enrolledCourses && customer.enrolledCourses.includes(productId)
     );
 
     res.json(enrolledCustomers);
+});
+
+/* 
+  =============
+  ORDERS ROUTES
+  =============
+*/
+
+// Get all orders
+app.get('/orders', (req, res) => {
+    const data = loadData();
+    res.json(data.orders || []);
+});
+
+// Create a new order
+app.post('/orders', (req, res) => {
+    const data = loadData();
+    const newOrder = req.body;
+    
+    // Server-side initialization
+    newOrder.id = Date.now();
+    newOrder.status = 'Pending'; // Default status
+    
+    if (!data.orders) data.orders = [];
+    data.orders.push(newOrder);
+    
+    saveData(data);
+    res.status(201).json(newOrder);
 });
 
 // Start the server

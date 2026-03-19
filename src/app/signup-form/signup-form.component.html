@@ -1,67 +1,87 @@
-<h2>Sign Up Form</h2>
-
-<form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
-  <div class="form-group">
-    <label for="name">Name:</label>
-    <input id="name" type="text" formControlName="name" />
-    @if(name?.invalid && name?.dirty || name?.touched) {
-      <div class="error">
-        @if(name?.errors?.['required']) {
-          <p>Name is required</p>
-        }
-        @if(name?.errors?.['minlength']) {
-          <p>Must be 3 characters</p>
-        }
+<div class="auth-wrapper">
+    <div class="auth-card">
+      <div class="auth-brand">
+        <span class="auth-logo">🍪</span>
+        <h1>The Crumb Co.</h1>
+        <p class="auth-tagline">Premium Delights, Freshly Baked</p>
       </div>
-    }
-  </div>
-
-  <div class="form-group">
-    <label for="email">Email:</label>
-    <input id="email" type="email" formControlName="email" />
-    @if(email?.invalid && email?.dirty || email?.touched) {
-      <div class="error">
-        @if(email?.errors?.['required']) {
-          <p>Email is required</p>
-        }
-        @if(email?.errors?.['email']) {
-          <p>Enter a valid email</p>
-        }
+  
+      <div class="auth-header">
+        <h2>{{ isLoginMode ? 'Welcome Back' : 'Join Our Crumb Community' }}</h2>
+        <p>{{ isLoginMode ? 'Log in to access your favorite treats' : 'Start your sweet journey with us today' }}</p>
       </div>
-    }
-  </div>
-
-  <div class="form-group">
-    <label for="password">Password:</label>
-    <input id="password" type="password" formControlName="password" />
-    @if(password?.invalid && password?.dirty || password?.touched) {
-      <div class="error">
-        @if(password?.errors?.['required']) {
-          <p>Password is required</p>
-        }
-        @if(password?.errors?.['minlength']) {
-          <p>Must be 8 characters</p>
-        }
-        @if(password?.errors?.['pattern']){
-          <p>Passwords must contain: a minimum of 1 special character, at least 1 upper case and numeric</p>
-        }
-      </div>
-    }
-  </div>
-
-  <button type="submit" [disabled]="signUpForm.invalid">Sign Up</button>
-
-  @if (submissionSuccess) {
-    <div class="success brown-theme-popup">
-      <p>Signed Up Successfully!</p>
-      <p class="tagline">You’re now a crumb closer to sweetness 🍪</p>
-      <button (click)="goToHome()">Go to Home</button>
+  
+      <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()" class="auth-form">
+        
+        <div class="form-group" *ngIf="!isLoginMode">
+          <label for="name">
+            <span class="label-text">Full Name</span>
+          </label>
+          <div class="input-container">
+            <span class="input-icon">👤</span>
+            <input id="name" type="text" formControlName="name" placeholder="John Doe" />
+          </div>
+          <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="error-hint">
+            <span *ngIf="name?.errors?.['required']">Name is required</span>
+            <span *ngIf="name?.errors?.['minlength']">Must be at least 3 characters</span>
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="email">
+            <span class="label-text">Email Address</span>
+          </label>
+          <div class="input-container">
+            <span class="input-icon">📧</span>
+            <input id="email" type="email" formControlName="email" placeholder="cookies@crumbco.com" />
+          </div>
+          <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="error-hint">
+            <span *ngIf="email?.errors?.['required']">Email is required</span>
+            <span *ngIf="email?.errors?.['email']">Enter a valid email address</span>
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="password">
+            <span class="label-text">Password</span>
+          </label>
+          <div class="input-container">
+            <span class="input-icon">🔒</span>
+            <input id="password" type="password" formControlName="password" placeholder="••••••••" />
+          </div>
+          <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="error-hint">
+            <span *ngIf="password?.errors?.['required']">Password is required</span>
+            <span *ngIf="password?.errors?.['minlength']">Min 8 characters</span>
+            <span *ngIf="password?.errors?.['pattern']">Needs 1 Cap, 1 Number, 1 Special Char</span>
+          </div>
+        </div>
+  
+        <button type="submit" class="submit-btn" [disabled]="signUpForm.invalid">
+          <span class="btn-text">{{ isLoginMode ? 'Log In' : 'Create Account' }}</span>
+          <span class="btn-icon">→</span>
+        </button>
+  
+        <div class="mode-toggle">
+          <p>{{ isLoginMode ? "First time here?" : "Already have an account?" }} 
+            <button type="button" class="toggle-link" (click)="toggleMode()">{{ isLoginMode ? 'Sign up for free' : 'Log in here' }}</button>
+          </p>
+        </div>
+  
+        <div *ngIf="submissionError" class="error-alert">
+          <span class="alert-icon">⚠️</span>
+          <span>{{submissionError}}</span>
+        </div>
+      </form>
     </div>
-  }
-
-  @if (submissionError) {
-    <div class="error">
-      <p>{{submissionError}}</p>
-    </div>
-  }
-</form>
+  
+    <!-- ✅ Success Overlay & Popup -->
+    @if (submissionSuccess) {
+      <div class="success-overlay"></div>
+      <div class="success brown-theme-popup">
+        <div class="success-checkmark">✔</div>
+        <h3>{{ isLoginMode ? 'Welcome Back!' : 'Welcome Home!' }}</h3>
+        <p class="tagline">{{ isLoginMode ? 'Redirecting you to the kitchen...' : 'Your account has been created successfully' }}</p>
+        <button class="entry-btn" (click)="goToHome()">Enter Crumb Co.</button>
+      </div>
+    }
+  </div>

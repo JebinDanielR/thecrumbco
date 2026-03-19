@@ -1,52 +1,52 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../models/product.model';
 import { ProductCardComponent } from "../product-card/product-card.component";
 import { ProductService } from '../services/product.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-products',
-  imports: [ProductCardComponent],
+  standalone: true,
+  imports: [ProductCardComponent, CommonModule, FormsModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit {
   title :string = "Our Products";
- 
   products : Product [] = [ ] 
-  cart :string [] = []
+  filteredProducts: Product[] = [];
+  searchQuery: string = '';
+  isLoading: boolean = true;
 
-  constructor(private productService:ProductService, private route:ActivatedRoute){
-           
-  }
+  constructor(private productService:ProductService, private route:ActivatedRoute){}
 
   ngOnInit(): void{
-    // this.route.queryParamMap.subscribe(params => {
-    //   const description = params.get('desc');
-    //   this.loadCourses(description);
-    // })
+    this.isLoading = true;
     this.productService.getProducts().subscribe({
           next:(response:Product[])=>{
             this.products=response;
+            this.filteredProducts = response;
+            // Delay slightly for skeleton loading effect
+            setTimeout(() => this.isLoading = false, 1500);
           },
           error:(err)=>{
             console.log(err);
+            this.isLoading = false;
           }
         });
-        console.log("initialized");
   }
 
-  
-  //  loadCourses(desc: string|null){
-  //   this.productService.getProducts(desc).subscribe({
-  //     next:(response:Product[])=>{
-  //       this.products=response;
-  //     },
-  //     error:(err)=>{
-  //       console.log(err);
-  //     }
-  //   });
-  //   console.log("initialized");
-  // }
-
+  onSearch(): void {
+    if (!this.searchQuery.trim()) {
+      this.filteredProducts = this.products;
+    } else {
+      const query = this.searchQuery.toLowerCase();
+      this.filteredProducts = this.products.filter(product => 
+        product.name.toLowerCase().includes(query) || 
+        product.desc.toLowerCase().includes(query)
+      );
+    }
+  }
 }

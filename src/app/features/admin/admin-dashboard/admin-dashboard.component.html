@@ -1,9 +1,40 @@
-<nav>
-    <a routerLink="/thecrumbco/admin/addproduct" routerLinkActive="active">Add Product</a>
-    <a routerLink="/thecrumbco/admin/customerlist" routerLinkActive="active">View Customers</a>
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <div class="sidebar-header">
+      <span class="admin-icon">⚙️</span>
+      <h3>Admin Panel</h3>
+    </div>
+    
+    <nav class="admin-nav">
+      <div class="nav-section">
+        <label>Management</label>
+        <a routerLink="/thecrumbco/admin" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="nav-link">
+          <span class="link-icon">📊</span>
+          Overview
+        </a>
+        <a routerLink="/thecrumbco/admin/productmgmt" routerLinkActive="active" class="nav-link">
+          <span class="link-icon">🍪</span>
+          Manage Products
+        </a>
+        <a routerLink="/thecrumbco/admin/vieworders" routerLinkActive="active" class="nav-link">
+          <span class="link-icon">📦</span>
+          View Orders
+        </a>
+      </div>
+      
+      <div class="nav-section">
+        <label>Community</label>
+        <a routerLink="/thecrumbco/admin/customerlist" routerLinkActive="active" class="nav-link">
+          <span class="link-icon">👥</span>
+          View Customers
+        </a>
+      </div>
+    </nav>
+  </aside>
 
-  </nav>
-  
-  <main>
-    <router-outlet></router-outlet>
+  <main class="admin-content">
+    <div class="content-wrapper">
+      <router-outlet></router-outlet>
+    </div>
   </main>
+</div>

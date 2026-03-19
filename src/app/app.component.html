@@ -1,12 +1,36 @@
-<nav>
-  <a routerLink="/thecrumbco" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home</a>
-  <a routerLink="/thecrumbco/products" routerLinkActive="active">Products</a>
-  <a routerLink="/thecrumbco/cart" routerLinkActive="active">Cart</a>
-  <!-- <a routerLink="/thecrumbco/checkout" routerLinkActive="active">Checkout</a> -->
-  <a routerLink="/thecrumbco/about" routerLinkActive="active">About us</a>
-  <a routerLink="/thecrumbco/favorites" routerLinkActive="active">Favorites</a>
-  <a routerLink="/thecrumbco/admin" routerLinkActive="active">Admin</a>
-  <a routerLink="/thecrumbco/signup" routerLinkActive="active">Sign Up</a>
-  <a routerLink="/thecrumbco/crumbcoassistant" routerLinkActive="active">Crumb Co Assistant</a>
+<nav *ngIf="authService.isLoggedIn() && showNav">
+  <div class="nav-links">
+    <a routerLink="/thecrumbco" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home</a>
+    <a routerLink="/thecrumbco/products" routerLinkActive="active">Products</a>
+    <a routerLink="/thecrumbco/about" routerLinkActive="active">About us</a>
+    <a *ngIf="authService.getCurrentUser()?.role === 'admin'" routerLink="/thecrumbco/admin" routerLinkActive="active">Admin</a>
+  </div>
+  
+  <div class="user-info">
+    <span class="welcome-text">Hi, {{ authService.getCurrentUser()?.name }}! 👋</span>
+    
+    <a routerLink="/thecrumbco/favorites" class="nav-icon-link">
+      <span class="material-icons">favorite</span>
+      <span class="nav-badge" *ngIf="getFavoriteCount() > 0">
+        {{ getFavoriteCount() }}
+      </span>
+    </a>
+    
+    <a routerLink="/thecrumbco/cart" class="nav-icon-link" [class.cart-wobble]="cartAnimating">
+      <span class="material-icons">shopping_bag</span>
+      <span class="nav-badge alert" *ngIf="cartService.getCartItems().length > 0">
+        {{ cartService.getCartItems().length }}
+      </span>
+    </a>
+
+    <button class="logout-link" (click)="logout()" title="Logout">
+      <span class="material-icons">logout</span>
+    </button>
+  </div>
 </nav>
-<router-outlet></router-outlet> 
+
+<main [class.full-page]="!authService.isLoggedIn() || !showNav">
+  <router-outlet></router-outlet>
+</main>
+
+<app-chatbot *ngIf="authService.isLoggedIn() && showNav"></app-chatbot>

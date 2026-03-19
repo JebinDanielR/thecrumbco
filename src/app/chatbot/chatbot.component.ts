@@ -25,6 +25,7 @@ export class ChatbotComponent implements AfterViewChecked {
   private shouldScroll = false;
 
   placeholderText = '';
+  placeholderAnimating = false;
 
   placeholders = [
     "Ask for cookies under 60...",
@@ -67,13 +68,18 @@ export class ChatbotComponent implements AfterViewChecked {
   rotatePlaceholder() {
 
     let i = 0;
-
     this.placeholderText = this.placeholders[0];
 
     setInterval(() => {
 
-      i = (i + 1) % this.placeholders.length;
-      this.placeholderText = this.placeholders[i];
+      // Trigger slide-up animation
+      this.placeholderAnimating = true;
+
+      setTimeout(() => {
+        i = (i + 1) % this.placeholders.length;
+        this.placeholderText = this.placeholders[i];
+        this.placeholderAnimating = false;
+      }, 300); // swap text mid-animation
 
     }, 3500);
 
@@ -84,11 +90,28 @@ export class ChatbotComponent implements AfterViewChecked {
   if(!this.message.trim()) return;
 
   const userMessage = this.message;
+  this.message = '';
 
   this.messages.push({
     sender:'user',
     text:userMessage
   });
+
+  // 🛒 Detect 'go to cart' intent locally — no API call needed
+  if(userMessage.trim().toLowerCase() === 'go to cart' || userMessage.trim().toLowerCase().includes('go to cart')) {
+    this.botTyping = true;
+    setTimeout(() => {
+      this.botTyping = false;
+      this.messages.push({
+        sender: 'bot',
+        text: '🛒 Taking you to your cart right now!',
+        showCartButton: false
+      });
+      this.shouldScroll = true;
+      setTimeout(() => this.goToCart(), 800);
+    }, 600);
+    return;
+  }
 
   this.botTyping = true;
 
@@ -99,12 +122,24 @@ export class ChatbotComponent implements AfterViewChecked {
 
       this.botTyping = false;
 
+      const isAddResponse = res.reply.includes('Added');
+
       this.messages.push({
         sender:'bot',
         text:res.reply,
         products:res.products,
-        suggestions:res.suggestions
+        suggestions:res.suggestions,
+        showCartButton: isAddResponse,
+        hideProducts: isAddResponse
       });
+
+      // 🛒 Auto-add to cart if the bot is "Added..."
+      if (res.products && res.products.length > 0 && isAddResponse) {
+        res.products.forEach((p: any) => {
+          this.cartService.addToCart(p);
+        });
+        console.log(`Auto-added ${res.products.length} items to cart via Chatbot`);
+      }
 
       this.shouldScroll = true;
 
@@ -112,13 +147,11 @@ export class ChatbotComponent implements AfterViewChecked {
 
   });
 
-  this.message='';
-
 }
 
 selectSuggestion(text:string){
 
-  this.message = text;
+  this.message = text.replace('also try: ', '');
   this.send();
 
 }

@@ -1,34 +1,69 @@
-<h2>Customers</h2>
-@if(loading){
-    <p>loading...</p>
-}
-@if (errorMessage) {
-    <div class="error">
-        <p>{{errorMessage}}</p>
+<div class="admin-page-header">
+  <h2>Our Community</h2>
+  <p>View and manage all registered customers in the Crumb Co family.</p>
+</div>
+
+<div class="table-container">
+  @if(loading){
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Baking the customer list...</p>
     </div>
-}
-@if (!loading && !errorMessage) {
+  }
+
+  @if (errorMessage) {
+    <div class="status-popup error">
+      <div class="popup-icon">❌</div>
+      <div class="popup-content">
+        <h4>Error Fetching Data</h4>
+        <p>{{errorMessage}}</p>
+      </div>
+    </div>
+  }
+
+  @if (!loading && !errorMessage) {
     @if (customers.length > 0) {
-        <table>
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (customer of customers; track customer.id) {
-                    <tr>
-                        <td>{{customer.id}}</td>
-                        <td>{{customer.name}}</td>
-                        <td>{{customer.email}}</td>
-                    </tr>
-                }
-            </tbody>
+      <div class="table-card">
+        <table class="premium-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Customer Name</th>
+              <th>Email Address</th>
+              <th>Role</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (customer of customers; track customer.id) {
+              <tr class="table-row">
+                <td class="col-id">#{{customer.id}}</td>
+                <td class="col-name">
+                  <div class="name-chip">
+                    <span class="avatar">{{customer.name.charAt(0)}}</span>
+                    {{customer.name}}
+                  </div>
+                </td>
+                <td class="col-email">{{customer.email}}</td>
+                <td class="col-role">
+                  <span class="role-badge">Customer</span>
+                </td>
+                <td class="col-actions">
+                  <button class="action-btn view" title="View Details">👁️</button>
+                  <button class="action-btn delete" title="Remove Customer">🗑️</button>
+                </td>
+              </tr>
+            }
+          </tbody>
         </table>
+      </div>
     }
     @else {
-    <p>No customers found</p>
+      <div class="empty-state">
+        <span class="empty-icon">📂</span>
+        <h3>No Customers Found</h3>
+        <p>It looks like the Crumb Co family hasn't started yet.</p>
+      </div>
     }
-}
+  }
+</div>

@@ -50,6 +50,19 @@
   border-color: #d2691e;
 }
 
+.form-section input.ng-invalid.ng-touched,
+.form-section textarea.ng-invalid.ng-touched {
+  border-color: #f44336;
+  background-color: #fff8f8;
+}
+
+.error-hint {
+  color: #f44336;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+  display: block;
+}
+
 .product-item h3 {
   color: #8b4513;
   font-size: 20px;
@@ -81,12 +94,11 @@
 }
 
 .product-item p:nth-of-type(1) {
-  /* Description paragraph */
   font-style: italic;
   min-height: 40px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; /* Added to center text horizontally in flex */
   opacity: 0.8;
 }
 
@@ -95,12 +107,14 @@
   font-size: 18px;
   font-weight: 600;
   color: #d2691e;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   background: #faf0e6;
   padding: 8px 15px;
   border-radius: 20px;
   border: 1px solid #e6d5c3;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   box-sizing: border-box;
 }

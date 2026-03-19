@@ -1,0 +1,107 @@
+<div class="overview-container">
+  <div class="overview-header">
+    <div class="header-content">
+      <h1>📊 Store Dashboard</h1>
+      <p>Real-time analytics and performance overview</p>
+    </div>
+    <div class="header-date">
+      <span class="calendar-icon">📅</span>
+      <span>{{ loading ? 'Updating...' : 'March 2026' }}</span>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <!-- Total Revenue Card -->
+    <div class="stat-card glass-card">
+      <div class="stat-main">
+        <div class="stat-icon revenue">💎</div>
+        <div class="stat-details">
+          <span class="stat-label">Total Revenue</span>
+          <h2 class="stat-value">₹{{ loading ? '0' : totalRevenue.toLocaleString() }}</h2>
+        </div>
+      </div>
+      <div class="stat-footer">
+        <span class="trend up">▲ 14.5%</span>
+        <span class="footer-note">since last month</span>
+      </div>
+    </div>
+
+    <!-- Total Orders Card -->
+    <div class="stat-card glass-card">
+      <div class="stat-main">
+        <div class="stat-icon orders">📦</div>
+        <div class="stat-details">
+          <span class="stat-label">Total Orders</span>
+          <h2 class="stat-value">{{ loading ? '0' : orderCount }}</h2>
+        </div>
+      </div>
+      <div class="stat-footer">
+        <span class="trend up">▲ 8.2%</span>
+        <span class="footer-note">fulfilled orders</span>
+      </div>
+    </div>
+
+    <!-- Total Customers Card -->
+    <div class="stat-card glass-card">
+      <div class="stat-main">
+        <div class="stat-icon customers">👥</div>
+        <div class="stat-details">
+          <span class="stat-label">Active Customers</span>
+          <h2 class="stat-value">{{ loading ? '0' : customerCount }}</h2>
+        </div>
+      </div>
+      <div class="stat-footer">
+        <span class="trend up">▲ 5.1%</span>
+        <span class="footer-note">new crumb members</span>
+      </div>
+    </div>
+
+    <!-- Store Value Card -->
+    <div class="stat-card glass-card">
+      <div class="stat-main">
+        <div class="stat-icon inventory">🍰</div>
+        <div class="stat-details">
+          <span class="stat-label">Inventory Worth</span>
+          <h2 class="stat-value">₹{{ loading ? '0' : totalValue.toLocaleString() }}</h2>
+        </div>
+      </div>
+      <div class="stat-footer">
+        <span class="total-items">{{ productCount }} individual dishes</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="performance-section">
+    <div class="chart-mockup glass-card">
+      <div class="chart-header">
+        <h3>📈 Sales Performance</h3>
+        <div class="chart-legend">
+          <span class="dot revenue"></span> Revenue
+          <span class="dot target"></span> Target
+        </div>
+      </div>
+      <div class="chart-bars">
+        <div class="bar-container" title="Mon: ₹1,200">
+          <div class="bar color-1" style="height: 60%"></div>
+          <span>Mon</span>
+        </div>
+        <div class="bar-container" title="Tue: ₹2,450">
+          <div class="bar color-2" style="height: 85%"></div>
+          <span>Tue</span>
+        </div>
+        <div class="bar-container" title="Wed: ₹1,900">
+          <div class="bar color-1" style="height: 70%"></div>
+          <span>Wed</span>
+        </div>
+        <div class="bar-container" title="Thu: ₹3,100">
+          <div class="bar color-2" style="height: 95%"></div>
+          <span>Thu</span>
+        </div>
+        <div class="bar-container" title="Fri: ₹2,800">
+          <div class="bar color-1" style="height: 75%"></div>
+          <span>Fri</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

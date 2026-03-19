@@ -1,7 +1,36 @@
+<div class="search-bar-container">
+    <div class="search-input-wrapper">
+        <span class="material-icons search-icon">search</span>
+        <input 
+            type="text" 
+            [(ngModel)]="searchQuery" 
+            (input)="onSearch()" 
+            placeholder="Search for cookies, cakes, coffee..."
+            class="search-input"
+        >
+    </div>
+</div>
+
 <div class="products">
-    @for (product of products; track product.id) 
-    {
-    <app-product-card [product]="product"> 
-    </app-product-card>
+    @if (isLoading) {
+        @for (i of [1,2,3,4,5,6]; track i) {
+            <div class="skeleton-card">
+                <div class="skeleton-img"></div>
+                <div class="skeleton-title"></div>
+                <div class="skeleton-price"></div>
+                <div class="skeleton-btn"></div>
+            </div>
+        }
+    } @else {
+        @for (product of filteredProducts; track product.id) {
+            <app-product-card [product]="product"></app-product-card>
+        }
+        @if (filteredProducts.length === 0) {
+            <div class="no-results">
+                <span class="material-icons">sentiment_dissatisfied</span>
+                <p>No products found matching "{{searchQuery}}"</p>
+                <button (click)="searchQuery = ''; onSearch()" class="clear-btn">Clear Search</button>
+            </div>
+        }
     }
 </div>

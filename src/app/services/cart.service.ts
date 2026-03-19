@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../models/product.model';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,17 +8,16 @@ import { BehaviorSubject } from 'rxjs';
 export class CartService {
 
   private cartItems: Product[] = [];
-
-  // 🔥 Reactive cart stream
   private cartSubject = new BehaviorSubject<Product[]>([]);
-
   cart$ = this.cartSubject.asObservable();
+
+  // 🔥 Trigger for animations
+  private addToCartSource = new Subject<void>();
+  addToCartTrigger$ = this.addToCartSource.asObservable();
 
   constructor() {}
 
-  // ✅ Add to cart
   addToCart(product: Product) {
-
     const existing = this.cartItems.find(p => p.id === product.id);
 
     if (existing) {
@@ -27,7 +26,8 @@ export class CartService {
       this.cartItems.push({ ...product, qty: 1 });
     }
 
-    this.cartSubject.next(this.cartItems);
+    this.cartSubject.next([...this.cartItems]);
+    this.addToCartSource.next(); // 🔥 Fire trigger
   }
 
   // ✅ Get cart (normal)

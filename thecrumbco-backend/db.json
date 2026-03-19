@@ -16,14 +16,14 @@
     },
     {
       "id": "3",
-      "name": "Choco-Chip Cookie",
+      "name": "Choco Chip Cookie",
       "desc": "Crispy on the edges, chewy in the center, loaded with melty chocolate chips in every bite",
       "price": "40",
       "img": "chocochipcookies.jpg"
     },
     {
       "id": "4",
-      "name": "Coffee-Bean Cookie",
+      "name": "Coffee Bean Cookie",
       "desc": "Crunchy coffee bean cookies bursting with bold espresso flavor and a hint of sweetness",
       "price": "55",
       "img": "coffeecookies.jpg"
@@ -71,20 +71,6 @@
       "img": "cocofudgebrownie.jpg"
     },
     {
-      "id": 1751458216397,
-      "name": "Coconut Fudge Brownie",
-      "desc": "A dense, fudgy brownie layered with sweet coconut for a rich, tropical twist on a chocolate classic",
-      "price": 140,
-      "img": "cocofudgebrownie.jpg"
-    },
-    {
-      "id": 1751526411076,
-      "name": "Vanilla Brownie",
-      "desc": "A dense, fudgy brownie layered with sweet coconut for a rich, tropical twist on a chocolate classic",
-      "price": 54,
-      "img": "cocofudgebrownie.jpg"
-    },
-    {
       "id": 1752217619020,
       "name": "Chocolate Macaroons",
       "desc": "Chewy and rich chocolate macaroons, packed with coconut and dipped in decadent dark chocolate",
@@ -97,6 +83,13 @@
       "desc": "Delicately chewy rosemilk macaroons infused with fragrant rose essence and a hint of creamy sweetness",
       "price": 75,
       "img": "rosemilkmacaroons.jpg"
+    },
+    {
+      "id": 1773757426983,
+      "name": "Haleem - Savory ",
+      "desc": "Very tasty spicy treat for Ramzan",
+      "price": 100,
+      "img": "haleem.jpg"
     }
   ],
   "customers": [
@@ -104,7 +97,8 @@
       "id": 1750247707564,
       "name": "Jebin Daniel R",
       "email": "jebinderil@gmail.com",
-      "password": "w1235@Wfghh",
+      "password": "123@abcD",
+      "role": "admin",
       "enrolledCourses": []
     },
     {
@@ -112,6 +106,7 @@
       "name": "Foodmine",
       "email": "jebinderil@gmail.com",
       "password": "123445678!A",
+      "role": "customer",
       "enrolledCourses": []
     },
     {
@@ -119,6 +114,7 @@
       "name": "Jebin Daniel R",
       "email": "jebinderil@gmail.com",
       "password": "dsdfdA@124",
+      "role": "customer",
       "enrolledCourses": []
     },
     {
@@ -126,6 +122,7 @@
       "name": "Jebin Daniel R",
       "email": "jebinderil@gmail.com",
       "password": "dgfgh%rfA566",
+      "role": "customer",
       "enrolledCourses": []
     },
     {
@@ -133,6 +130,7 @@
       "name": "Jebin Daniel R",
       "email": "jebinderil@gmail.com",
       "password": "A@23456erth",
+      "role": "customer",
       "enrolledCourses": []
     },
     {
@@ -140,6 +138,7 @@
       "name": "Jebin Daniel R",
       "email": "jebinderil@gmail.com",
       "password": "Jebin@2002",
+      "role": "customer",
       "enrolledCourses": []
     },
     {
@@ -147,6 +146,7 @@
       "name": "Jebin Daniel R",
       "email": "jebinderil@gmail.com",
       "password": "Jebin@233221",
+      "role": "customer",
       "enrolledCourses": []
     },
     {
@@ -154,6 +154,7 @@
       "name": "Jebin Daniel R",
       "email": "jebinderil@gmail.com",
       "password": "Jevun@242",
+      "role": "customer",
       "enrolledCourses": []
     },
     {
@@ -161,6 +162,7 @@
       "name": "Jebin Daniel R",
       "email": "jebinderil@gmail.com",
       "password": "dfghj34567@WE",
+      "role": "customer",
       "enrolledCourses": []
     },
     {
@@ -168,6 +170,7 @@
       "name": "Jebin Daniel R",
       "email": "jebinderil@gmail.com",
       "password": "@E443dxx",
+      "role": "customer",
       "enrolledCourses": []
     },
     {
@@ -175,6 +178,7 @@
       "name": "Jebin Daniel R",
       "email": "jebinderil@gmail.com",
       "password": "Jebin@2332",
+      "role": "customer",
       "enrolledCourses": []
     },
     {
@@ -182,6 +186,7 @@
       "name": "Jebin Daniel R",
       "email": "jebinderil@gmail.com",
       "password": "Jev@35f5",
+      "role": "customer",
       "enrolledCourses": []
     },
     {
@@ -189,6 +194,7 @@
       "name": "Jebin Daniel R",
       "email": "jebinderil@gmail.com",
       "password": "Jebin@2002",
+      "role": "customer",
       "enrolledCourses": []
     },
     {
@@ -196,6 +202,7 @@
       "name": "Jebin Daniel R",
       "email": "jebinderil@gmail.com",
       "password": "Jebin@3545",
+      "role": "customer",
       "enrolledCourses": []
     },
     {
@@ -203,6 +210,7 @@
       "name": "Jebin Daniel R",
       "email": "jebinderil@gmail.com",
       "password": "@R45rffde",
+      "role": "customer",
       "enrolledCourses": []
     },
     {
@@ -210,6 +218,7 @@
       "name": "Jebin Daniel R",
       "email": "jebinderil@gmail.com",
       "password": "Jebin@233",
+      "role": "customer",
       "enrolledCourses": []
     },
     {
@@ -217,6 +226,7 @@
       "name": "Jebin Daniel R",
       "email": "jebinderil@gmail.com",
       "password": "Jebin@23hu",
+      "role": "customer",
       "enrolledCourses": []
     },
     {
@@ -224,6 +234,7 @@
       "name": "Jebin Daniel R",
       "email": "jebinderil@gmail.com",
       "password": "G2e@23rg",
+      "role": "customer",
       "enrolledCourses": []
     },
     {
@@ -231,6 +242,7 @@
       "name": "Jebin Daniel R",
       "email": "jebinderil@gmail.com",
       "password": "Jebin@232",
+      "role": "customer",
       "enrolledCourses": []
     },
     {
@@ -238,6 +250,7 @@
       "name": "Jebin Daniel R",
       "email": "jebinderil@gmail.com",
       "password": "Jebin@2992",
+      "role": "customer",
       "enrolledCourses": []
     },
     {
@@ -245,6 +258,7 @@
       "name": "Jebin Daniel R",
       "email": "jebinderil@gmail.com",
       "password": "Jeb@@3r55",
+      "role": "customer",
       "enrolledCourses": []
     },
     {
@@ -252,6 +266,7 @@
       "name": "Jebin Daniel R",
       "email": "jebinderil@gmail.com",
       "password": "Jebi@223",
+      "role": "customer",
       "enrolledCourses": []
     },
     {
@@ -259,6 +274,7 @@
       "name": "Jebin Daniel R",
       "email": "jebinderil@gmail.com",
       "password": "@J23edbh",
+      "role": "customer",
       "enrolledCourses": []
     },
     {
@@ -266,6 +282,7 @@
       "name": "Jebin Daniel R",
       "email": "jebinderil@gmail.com",
       "password": "Jebin@2443",
+      "role": "customer",
       "enrolledCourses": []
     },
     {
@@ -273,6 +290,7 @@
       "name": "Sam Deril",
       "email": "samderil2005@gmail.com",
       "password": "Sam@2005",
+      "role": "customer",
       "enrolledCourses": []
     },
     {
@@ -280,8 +298,194 @@
       "name": "Jebin Daniel R",
       "email": "jebinderil@gmail.com",
       "password": "Jebin@2002",
+      "role": "customer",
+      "enrolledCourses": []
+    },
+    {
+      "id": 1773756875736,
+      "name": "Kishore",
+      "email": "kishore@gmail.com",
+      "password": "Kishore@1234",
+      "role": "customer",
       "enrolledCourses": []
     }
   ],
-  "cart": []
+  "cart": [],
+  "orders": [
+    {
+      "id": 1718812345678,
+      "name": "Kishore",
+      "email": "kishore@gmail.com",
+      "phone": "9876543210",
+      "address": "101 Seaside Ave",
+      "city": "Chennai",
+      "pincode": "600001",
+      "items": [
+        {
+          "name": "Classic Brownie",
+          "price": "100",
+          "qty": 2
+        },
+        {
+          "name": "Vanilla Cupcake",
+          "price": "60",
+          "qty": 1
+        }
+      ],
+      "total": 260,
+      "paymentId": "MOCK_SEED_001",
+      "status": "Pending",
+      "placedAt": "2026-03-18T10:30:00Z"
+    },
+    {
+      "id": 1718812345679,
+      "name": "Jebin Daniel R",
+      "email": "jebinderil@gmail.com",
+      "phone": "9988776655",
+      "address": "42 Sweet Lane",
+      "city": "Chennai",
+      "pincode": "600020",
+      "items": [
+        {
+          "name": "Chocolate Croissant",
+          "price": "120",
+          "qty": 1
+        }
+      ],
+      "total": 120,
+      "paymentId": "MOCK_SEED_002",
+      "status": "Pending",
+      "placedAt": "2026-03-18T12:45:00Z"
+    },
+    {
+      "name": "Jebin Daniel R",
+      "email": "jebinderil@gmail.com",
+      "phone": "6382803541",
+      "address": "Varadharajapuram, Kottamangalam",
+      "city": "Tiruppur",
+      "pincode": "642201",
+      "items": [
+        {
+          "name": "Coffee Brownie",
+          "price": "130",
+          "qty": 1
+        }
+      ],
+      "total": 130,
+      "paymentId": "MOCK_PAYID_04RMF",
+      "placedAt": "2026-03-18T08:39:22.198Z",
+      "id": 1773823162225,
+      "status": "Pending"
+    },
+    {
+      "name": "Jebin Daniel R",
+      "email": "jebinderil@gmail.com",
+      "phone": "6382803541",
+      "address": "Varadharajapuram, Kottamangalam",
+      "city": "Tiruppur",
+      "pincode": "642201",
+      "items": [
+        {
+          "name": "Vanilla Cookie",
+          "price": 45,
+          "qty": 2
+        }
+      ],
+      "total": 90,
+      "paymentId": "MOCK_PAYID_VJDGZU",
+      "placedAt": "2026-03-18T08:53:34.798Z",
+      "id": 1773824014808,
+      "status": "Pending"
+    },
+    {
+      "name": "Jebin Daniel R",
+      "email": "jebinderil@gmail.com",
+      "phone": "6382803541",
+      "address": "Varadharajapuram, Kottamangalam",
+      "city": "Tiruppur",
+      "pincode": "642201",
+      "items": [
+        {
+          "name": "Classic Brownie",
+          "price": "100",
+          "qty": 1
+        }
+      ],
+      "total": 100,
+      "paymentId": "MOCK_PAYID_G4XYCF",
+      "placedAt": "2026-03-18T09:01:04.774Z",
+      "id": 1773824464786,
+      "status": "Pending"
+    },
+    {
+      "name": "Jebin Daniel R",
+      "email": "jebinderil@gmail.com",
+      "phone": "6787678990",
+      "address": "Varadharajapuram, Kottamangalam",
+      "city": "Tiruppur",
+      "pincode": "642201",
+      "items": [
+        {
+          "name": "Classic Brownie",
+          "price": "100",
+          "qty": 1
+        }
+      ],
+      "total": 100,
+      "paymentId": "MOCK_PAYID_IFA0RZ",
+      "placedAt": "2026-03-18T09:11:21.057Z",
+      "id": 1773825081087,
+      "status": "Pending"
+    },
+    {
+      "name": "Jebin Daniel R",
+      "email": "jebinderil@gmail.com",
+      "phone": "6382803541",
+      "address": "Varadharajapuram, Kottamangalam",
+      "city": "Tiruppur",
+      "pincode": "642201",
+      "items": [
+        {
+          "name": "Coffee Brownie",
+          "price": "130",
+          "qty": 1
+        }
+      ],
+      "total": 130,
+      "paymentId": "MOCK_PAYID_YFNAMR",
+      "placedAt": "2026-03-18T10:28:39.023Z",
+      "id": 1773829719058,
+      "status": "Pending"
+    },
+    {
+      "name": "Jebin Daniel R",
+      "email": "jebinderil@gmail.com",
+      "phone": "6382803541",
+      "address": "Varadharajapuram, Kottamangalam",
+      "city": "Tiruppur",
+      "pincode": "642201",
+      "items": [
+        {
+          "name": "Coffee Brownie",
+          "price": "130",
+          "qty": 1
+        },
+        {
+          "name": "Choco Chip Cookie",
+          "price": "40",
+          "qty": 1
+        },
+        {
+          "name": "Chocolate Cupcake",
+          "price": "80",
+          "qty": 1
+        }
+      ],
+      "total": 250,
+      "paymentId": "MOCK_PAYID_DAQB4M",
+      "placedAt": "2026-03-18T13:05:55.665Z",
+      "id": 1773839155677,
+      "status": "Pending"
+    }
+  ]
 }

@@ -1,0 +1,65 @@
+<div class="orders-page">
+    <div class="page-header">
+      <h2>📦 Customer Orders</h2>
+      <p>View all recent transactions from your store.</p>
+    </div>
+  
+    <div *ngIf="loading" class="loading-state">
+      <div class="spinner">🍩</div>
+      <p>Loading your orders...</p>
+    </div>
+  
+    <div *ngIf="!loading && orders.length === 0" class="empty-state">
+      <div class="empty-icon">🍞</div>
+      <h3>No Orders Yet</h3>
+      <p>When customers buy items, they'll show up here!</p>
+    </div>
+  
+    <div *ngIf="!loading && orders.length > 0" class="orders-table-wrapper">
+      <table class="orders-table">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Customer Info</th>
+            <th>Items</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders">
+            <td>
+              <span class="order-id">#{{ order.id }}</span>
+              <br>
+              <small class="payment-id">PayID: {{ order.paymentId }}</small>
+            </td>
+            <td>
+              <strong>{{ order.name }}</strong><br>
+              <small>{{ order.email }}</small><br>
+              <small>📞 {{ order.phone }}</small><br>
+              <small class="address-small">📍 {{ order.address }}, {{ order.city }} - {{ order.pincode }}</small>
+            </td>
+            <td>
+              <ul class="items-list">
+                <li *ngFor="let item of order.items">
+                  {{ item.name }} <span class="qty">x{{ item.qty }}</span>
+                </li>
+              </ul>
+            </td>
+            <td>
+              <span class="total-badge">₹{{ order.total }}</span>
+            </td>
+            <td>
+              <span class="status-pill" [class.pending]="order.status === 'Pending'" [class.completed]="order.status !== 'Pending'">
+                {{ order.status }}
+              </span>
+            </td>
+            <td>
+              {{ formatDate(order.placedAt) }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

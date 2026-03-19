@@ -20,7 +20,7 @@
 
   <div class="chat-body" #chatBody>
 
-    <div *ngFor="let msg of messages">
+    <div *ngFor="let msg of messages; let i = index">
 
       <!-- USER MESSAGE -->
 
@@ -38,40 +38,43 @@
     {{msg.text}}
   </div>
 
-  <!-- PRODUCTS -->
-  <div class="product-card" *ngFor="let p of msg.products">
+  <!-- PRODUCTS GRID: 2 per row, square -->
+  <div class="products-grid" *ngIf="msg.products && msg.products.length > 0 && !msg.hideProducts">
+    <div class="product-card" *ngFor="let p of msg.products">
 
-    <img src="{{p.img}}" class="product-img">
+      <img src="{{p.img}}" class="product-img">
 
-    <div class="product-name">{{p.name}}</div>
+      <div class="product-name">{{p.name}}</div>
 
-    <div class="product-price">₹{{p.price}}</div>
+      <div class="product-price">₹{{p.price}}</div>
 
-    <button class="cart-btn" (click)="addToCart(p)">
-      Add to Cart
-    </button>
+      <button class="cart-btn" (click)="addToCart(p)">
+        Add to Cart
+      </button>
 
+    </div>
   </div>
+
   <!-- GO TO CART BUTTON -->
-<button 
-  *ngIf="msg.showCartButton"
-  class="go-cart-btn"
-  (click)="goToCart()">
+  <button
+    *ngIf="msg.showCartButton"
+    class="go-cart-btn"
+    (click)="goToCart()">
+    🛒 Go to Cart
+  </button>
 
-  🛒 Go to Cart
-
-</button>
-
-  <!-- SUGGESTIONS -->
-  <div class="suggestions" *ngIf="msg.suggestions">
+  <!-- SUGGESTIONS: only show for the last message -->
+  <div class="suggestions" *ngIf="msg.suggestions && i === messages.length - 1">
+    
+    <div class="suggestion-header" *ngIf="msg.text.includes('Added')">
+      also try:
+    </div>
 
     <button
       *ngFor="let s of msg.suggestions"
       (click)="selectSuggestion(s)"
       class="suggestion-chip">
-
-      {{s}}
-
+      {{ s.replace('also try: ', '') }}
     </button>
 
   </div>
@@ -96,11 +99,24 @@
 
   <div class="chat-input">
 
-    <input
-      [(ngModel)]="message"
-      [placeholder]="placeholderText"
-      (keyup.enter)="send()"
-    />
+    <div class="input-wrapper">
+
+      <input
+        [(ngModel)]="message"
+        placeholder=""
+        (keyup.enter)="send()"
+        class="chat-input-field"
+      />
+
+      <!-- Animated placeholder — hidden when user types -->
+      <span
+        class="animated-placeholder"
+        [class.hidden]="message.length > 0"
+        [class.slide-up]="placeholderAnimating">
+        {{ placeholderText }}
+      </span>
+
+    </div>
 
     <button class="send-btn" (click)="send()">
 

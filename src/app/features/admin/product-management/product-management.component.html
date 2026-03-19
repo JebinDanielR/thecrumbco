@@ -1,0 +1,110 @@
+<div class="mgmt-page">
+    <div class="page-header">
+      <h2>🍪 Product Management</h2>
+      <p>View, add, edit, and delete treats from your store.</p>
+      <button (click)="toggleForm()" class="add-btn" [class.cancel]="showForm">
+        {{ showForm ? 'Cancel' : '+ Add New Product' }}
+      </button>
+    </div>
+  
+    <!-- ✅ FORM SECTION -->
+    <div *ngIf="showForm" class="form-card animate-slide-down">
+      <div class="form-header">
+        <h3>{{ isEditing ? 'Edit Product' : 'Add New Product' }}</h3>
+      </div>
+      <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Product Title</label>
+            <div class="input-container">
+              <span class="input-icon">🏷️</span>
+              <input type="text" formControlName="name" placeholder="e.g. Double Choco Chip" />
+            </div>
+            <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched" class="error-msg">
+              <p *ngIf="productForm.get('name')?.errors?.['required']">Product title is required</p>
+              <p *ngIf="productForm.get('name')?.errors?.['minlength']">Title must be at least 3 characters</p>
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <label>Price (₹)</label>
+            <div class="input-container">
+              <span class="input-icon">💰</span>
+              <input type="number" formControlName="price" placeholder="0.00" />
+            </div>
+            <div *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched" class="error-msg">
+              <p *ngIf="productForm.get('price')?.errors?.['required']">Price is required</p>
+            </div>
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label>Description</label>
+          <div class="input-container">
+            <span class="input-icon">📝</span>
+            <textarea formControlName="desc" placeholder="Describe the product's flavor, texture, and ingredients..." rows="3"></textarea>
+          </div>
+          <div *ngIf="productForm.get('desc')?.invalid && productForm.get('desc')?.touched" class="error-msg">
+            <p *ngIf="productForm.get('desc')?.errors?.['required']">Description is required</p>
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label>Image URL</label>
+          <div class="input-container">
+            <span class="input-icon">🖼️</span>
+            <input type="url" formControlName="img" placeholder="https://example.com/image.jpg" />
+          </div>
+          <div *ngIf="productForm.get('img')?.invalid && productForm.get('img')?.touched" class="error-msg">
+            <p *ngIf="productForm.get('img')?.errors?.['required']">Image URL is required</p>
+          </div>
+        </div>
+  
+        <div class="form-actions">
+          <button type="submit" [disabled]="productForm.invalid" class="submit-btn">
+            {{ isEditing ? 'Save Changes' : 'Add to Store' }}
+          </button>
+        </div>
+      </form>
+  
+      <div *ngIf="submissionSuccess" class="status-popup success animate-pop">
+        <div class="popup-icon">✅</div>
+        <p>Operation successful!</p>
+      </div>
+      <div *ngIf="submissionError" class="status-popup error animate-pop">
+        <div class="popup-icon">❌</div>
+        <p>{{ submissionError }}</p>
+      </div>
+    </div>
+  
+    <!-- ✅ PRODUCTS LIST -->
+    <div class="products-grid">
+      <div *ngIf="loading" class="loading-state">
+        <div class="spinner">🧁</div>
+        <p>Loading the treats...</p>
+      </div>
+  
+      <div *ngIf="!loading && products.length === 0" class="empty-state">
+        <div class="empty-icon">🫙</div>
+        <h3>No products found</h3>
+        <p>Time to bake some deliciousness!</p>
+      </div>
+  
+      <div *ngFor="let product of products" class="product-item">
+        <div class="product-img">
+          <img [src]="product.img" [alt]="product.name" onerror="this.src='https://placehold.co/200x200?text=Treat+Image'" />
+        </div>
+        <div class="product-info">
+          <div class="product-header">
+            <h4>{{ product.name }}</h4>
+            <span class="price-tag">₹{{ product.price }}</span>
+          </div>
+          <p class="product-desc">{{ product.desc }}</p>
+          <div class="product-actions">
+            <button (click)="editProduct(product)" class="edit-btn">✏️ Edit</button>
+            <button (click)="deleteProduct(product.id)" class="delete-btn">🗑️ Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,19 +1,28 @@
 nav {
     background-color: #3e2723; /* dark brown */
-    padding: 1rem;
+    padding: 0.75rem 2rem;
     display: flex;
-    gap: 1rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
   }
   
+  .nav-links {
+    display: flex;
+    gap: 0.5rem;
+  }
+
   nav a {
     color: #f5f5f5; /* light text */
     text-decoration: none;
     font-weight: 500;
     padding: 0.5rem 1rem;
     border-radius: 8px;
-    transition: background-color 0.3s, color 0.3s;
-    position: relative;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
   }
   
   nav a:hover {
@@ -24,6 +33,147 @@ nav {
   nav a.active {
     background-color: #8d6e63; /* even lighter brown for active link */
     color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+
+  .user-info {
+    display: flex;
+    align-items: center;
+    /* gap: 1.5rem; */
+  }
+
+  .welcome-text {
+    color: #d7ccc8;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .logout-btn {
+    background: linear-gradient(135deg, #d32f2f, #b71c1c);
+    color: white;
+    border: none;
+    padding: 0.5rem 1.25rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+
+  .logout-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(211, 47, 47, 0.4);
+    filter: brightness(1.1);
+  }
+
+  /* 🎨 Navigation Icon-Link Styles */
+  .nav-icon-link {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border-radius: 50%;
+    color: #f5f5f5;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    padding: 0;
+    margin: 0 5px;
+  }
+
+  /* 🔔 Universal Nav Badge - Proper overlapping count */
+  .nav-badge {
+    position: absolute;
+    top: 7px;
+    right: 12px;
+    background: #d8a774; /* Warm tan matching your sample */
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 800;
+    min-width: 21px;
+    height: 21px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    border: 1.5px solid #3e2723; /* Matching nav background */
+    z-index: 10;
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .nav-badge.alert {
+    background: #d8a774; /* Matching tan for consistency */
+  }
+
+  .nav-icon-link .material-icons {
+    font-size: 26px;
+    opacity: 0.95;
+    color: #f5f5f5;
+  }
+
+  /* 🛒 Cart Wobble Animation */
+  .cart-wobble {
+    animation: wobble 0.6s ease-in-out;
+  }
+
+  @keyframes wobble {
+    0% { transform: rotate(0deg) scale(1.1); }
+    15% { transform: rotate(15deg) scale(1.2); }
+    30% { transform: rotate(-15deg) scale(1.2); }
+    45% { transform: rotate(10deg) scale(1.1); }
+    60% { transform: rotate(-10deg) scale(1.1); }
+    100% { transform: rotate(0deg) scale(1.1); }
+  }
+
+  .nav-icon-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    /* transform: scale(1.1); */
+  }
+
+  .nav-icon-link:hover .material-icons {
+    opacity: 1;
+  }
+
+  /* Redundant badgePulse and outline styles removed for clarity */
+
+  .logout-link {
+    background: transparent;
+    border: none;
+    color: #f5f5f5;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    margin: 0 5px;
+  }
+
+  .logout-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ff5252;
+    transform: scale(1.1);
+  }
+
+  .logout-link .material-icons {
+    font-size: 26px;
+  }
+
+  main {
+    min-height: calc(100vh - 64px);
+    background-color: #fffaf0;
+  }
+
+  main.full-page {
+    min-height: 100vh;
   }
 
  

@@ -291,11 +291,33 @@
   }
   
   /* Remove button hover states */
-  .product-item button:hover {
-    background: linear-gradient(135deg, #a0522d 0%, #8b4513 100%);
+  .product-item button.add-to-cart-btn {
+    margin-top: auto;
   }
   
-  .product-item button:focus {
-    outline: 2px solid #cd853f;
-    outline-offset: 2px;
+  .item-actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+  }
+  
+  .remove-icon-btn {
+    background: rgba(255, 255, 255, 0.9) !important;
+    color: #8b4513 !important;
+    width: 34px !important;
+    height: 34px !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50% !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    border: none !important;
+  }
+  
+  .remove-icon-btn:hover {
+    background: #8b4513 !important;
+    color: white !important;
+    transform: scale(1.1) rotate(90deg) !important;
   }

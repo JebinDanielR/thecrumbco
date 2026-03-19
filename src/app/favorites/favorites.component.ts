@@ -1,14 +1,18 @@
-import { CurrencyPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule, CurrencyPipe } from '@angular/common';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-favorites',
-  imports: [CurrencyPipe],
+  standalone: true,
+  imports: [CommonModule, CurrencyPipe],
   templateUrl: './favorites.component.html',
   styleUrl: './favorites.component.css'
 })
-export class FavoritesComponent {
+export class FavoritesComponent implements OnInit {
   favoriteItems: any[] = [];
+
+  constructor(public cartService: CartService) {}
 
   ngOnInit() {
     this.loadFavorites();
@@ -17,6 +21,10 @@ export class FavoritesComponent {
   loadFavorites() {
     const stored = localStorage.getItem('favorites');
     this.favoriteItems = stored ? JSON.parse(stored) : [];
+  }
+
+  addToCart(item: any) {
+    this.cartService.addToCart(item);
   }
 
   removeFromFavorites(id: number) {

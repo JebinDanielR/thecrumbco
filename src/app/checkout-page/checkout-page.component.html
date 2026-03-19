@@ -1,55 +1,127 @@
 <div class="checkout-container">
-    <h2>Checkout</h2>
+    <div class="checkout-header">
+      <h2>🍪 Finalize Your Treats</h2>
+      <p>Securely checkout and have your desserts delivered fresh.</p>
+    </div>
   
-    <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
-      <div class="form-section">
-        <label>Full Name:</label>
-        <input type="text" formControlName="name" required />
-  
-        <label>Email:</label>
-        <input type="email" formControlName="email" required />
-  
-        <label>Phone Number:</label>
-        <input type="tel" formControlName="phone" required />
-  
-        <label>Address:</label>
-        <textarea rows="3" formControlName="address" required></textarea>
-  
-        <label>City:</label>
-        <input type="text" formControlName="city" required />
-  
-        <label>Pincode:</label>
-        <input type="text" formControlName="pincode" required />
-      </div>
-  
-      <div class="order-summary">
-        <h3>Order Summary</h3>
-        @for (item of cartItems; track item.id) {
-          <div class="summary-item">
-            <span>{{ item.name }} x {{ item.qty }}</span>
-            <span>₹{{ item.price}} * {{item.qty }}</span>
+    <div class="checkout-layout">
+      <!-- 📋 CHECKOUT FORM -->
+      <div class="checkout-card">
+        <form [formGroup]="checkoutForm">
+          <div class="section-title">
+            <span>👤</span>
+            <h3>Delivery Details</h3>
           </div>
-        }
-        <div class="summary-total">
-          <strong>Total:</strong>
-          <strong>₹{{ total }}</strong>
-        </div>
+  
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label for="name">Recipient Name</label>
+              <div class="input-container">
+                <span class="input-icon">👤</span>
+                <input id="name" type="text" formControlName="name" placeholder="John Doe" />
+              </div>
+              <div *ngIf="checkoutForm.get('name')?.invalid && checkoutForm.get('name')?.touched" class="error-hint">
+                <span *ngIf="checkoutForm.get('name')?.errors?.['required']">Recipient name is required</span>
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <div class="input-container">
+                <span class="input-icon">📧</span>
+                <input id="email" type="email" formControlName="email" placeholder="cookies@crumbco.com" />
+              </div>
+              <div *ngIf="checkoutForm.get('email')?.invalid && checkoutForm.get('email')?.touched" class="error-hint">
+                <span *ngIf="checkoutForm.get('email')?.errors?.['required']">Email is required</span>
+                <span *ngIf="checkoutForm.get('email')?.errors?.['email']">Invalid email address</span>
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <div class="input-container">
+                <span class="input-icon">📞</span>
+                <input id="phone" type="tel" formControlName="phone" placeholder="9876543210" />
+              </div>
+              <div *ngIf="checkoutForm.get('phone')?.invalid && checkoutForm.get('phone')?.touched" class="error-hint">
+                <span *ngIf="checkoutForm.get('phone')?.errors?.['required']">Phone is required</span>
+              </div>
+            </div>
+  
+            <div class="form-group full-width">
+              <label for="address">Full Address</label>
+              <div class="input-container">
+                <span class="input-icon">🏠</span>
+                <textarea id="address" formControlName="address" placeholder="123 Sweet Lane..." rows="2"></textarea>
+              </div>
+              <div *ngIf="checkoutForm.get('address')?.invalid && checkoutForm.get('address')?.touched" class="error-hint">
+                <span *ngIf="checkoutForm.get('address')?.errors?.['required']">Full address is required</span>
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label for="city">City</label>
+              <div class="input-container">
+                <span class="input-icon">📍</span>
+                <input id="city" type="text" formControlName="city" placeholder="Pondicherry" />
+              </div>
+              <div *ngIf="checkoutForm.get('city')?.invalid && checkoutForm.get('city')?.touched" class="error-hint">
+                <span *ngIf="checkoutForm.get('city')?.errors?.['required']">City is required</span>
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label for="pincode">Pincode</label>
+              <div class="input-container">
+                <span class="input-icon">📮</span>
+                <input id="pincode" type="text" formControlName="pincode" placeholder="605001" />
+              </div>
+              <div *ngIf="checkoutForm.get('pincode')?.invalid && checkoutForm.get('pincode')?.touched" class="error-hint">
+                <span *ngIf="checkoutForm.get('pincode')?.errors?.['required']">Pincode is required</span>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
   
-      <button class="place-order-btn" type="submit" [disabled]="checkoutForm.invalid">
-        Place Order
-      </button>
-    </form>
-  
-    <!-- ✅ Show this only after successful form submission -->
-    @if (orderPlaced) {
-      <div class="popup-overlay">
-        <div class="popup">
-          <h2>Order Placed Successfully 🎉</h2>
-          <p>Thank you for ordering from The Crumb Co.</p>
-          <button (click)="closePopup()">Go to Home</button>
+      <!-- 🧁 ORDER SUMMARY -->
+      <div class="summary-card">
+        <h3>🛍️ Order Summary</h3>
+        <div class="order-items">
+          <div *ngFor="let item of cartItems" class="item-row">
+            <span class="item-name">{{ item.name }} <span class="item-qty">x{{ item.qty }}</span></span>
+            <span class="item-price">₹{{ item.price}}*{{item.qty}}</span>
+          </div>
         </div>
+  
+        <div class="total-row">
+          <span class="total-label">Total Amount</span>
+          <span class="total-amount">₹{{ total }}</span>
+        </div>
+  
+        <button [disabled]="checkoutForm.invalid" (click)="payNow()" class="pay-btn" [class.success-state]="paymentSuccess">
+          {{ paymentSuccess ? 'Payment Successful ✔' : 'Pay ₹' + total }}
+        </button>
+        <span class="payment-note">⚡ Fast, Secure & Encrypted</span>
       </div>
-    }
+    </div>
+  
+    <!-- 💳 GATEWAY OVERLAY -->
+    <div *ngIf="isProcessingPayment && !paymentSuccess" class="payment-overlay">
+      <div class="payment-modal">
+        <span class="bank-logo">🏦</span>
+        <h3>Gateway Initialized</h3>
+        <p>Connecting to secure payment network...</p>
+        <div class="cookie-spinner">🍪</div>
+        <small style="color: #a1887f;">Validating your transaction for ₹{{ total }}</small>
+      </div>
+    </div>
+  
+    <!-- ✅ SUCCESS POPUP -->
+    <div *ngIf="paymentSuccess && orderPlaced" class="success-popup">
+      <div class="success-icon">🎉</div>
+      <h2>Order Placed Successfully!</h2>
+      <p>Your desserts are jumping into the oven. We'll send you a confirmation email shortly.</p>
+      <button class="home-btn" (click)="goToHome()">Back to Home</button>
+    </div>
   </div>
-  

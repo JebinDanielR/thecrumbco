@@ -4,5 +4,6 @@ export interface Customer {
     email:string;
     password:string;
     phoneNumber?:number;
+    role?:string;
 }
 

@@ -1,71 +1,90 @@
-<h2>Add Your Product</h2>
- 
-<form [formGroup]="addProductForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-        <label for="name">Title:</label>
-        <input id="name" type="text" formControlName="name" />
-        @if(name?.invalid && name?.dirty || name?.touched) {
-            <div class="error">
-                @if(name?.errors?.['required']) {
-                    <p>Name is required</p>
-                }
-                @if(name?.errors?.['minlength']) {
-                    <p>Must be 3 characters</p>
-                }
-            </div>
+<div class="admin-page-header">
+  <h2>Add New Product</h2>
+  <p>Fill in the details below to add a delicious new item to the store.</p>
+</div>
+
+<div class="form-card">
+  <form [formGroup]="addProductForm" (ngSubmit)="onSubmit()">
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="name">Product Title</label>
+        <div class="input-container">
+          <span class="input-icon">🏷️</span>
+          <input id="name" type="text" formControlName="name" placeholder="e.g. Double Choco Chip" />
+        </div>
+        @if(name?.invalid && (name?.dirty || name?.touched)) {
+          <div class="error-msg">
+            @if(name?.errors?.['required']) { <p>Product title is required</p> }
+            @if(name?.errors?.['minlength']) { <p>Title must be at least 3 characters</p> }
+          </div>
         }
-    </div>
+      </div>
 
-    <div class="form-group">
-        <label for="desc">Description:</label>
-        <input id="desc" type="text" formControlName="desc" />
-        @if(desc?.invalid && desc?.dirty || desc?.touched) {
-            <div class="error">
-                @if(desc?.errors?.['required']) {
-                    <p>Description is required</p>
-                }
-            </div>
+      <div class="form-group">
+        <label for="price">Price (₹)</label>
+        <div class="input-container">
+          <span class="input-icon">💰</span>
+          <input id="price" type="number" formControlName="price" placeholder="0.00" />
+        </div>
+        @if(price?.invalid && (price?.dirty || price?.touched)) {
+          <div class="error-msg">
+            @if(price?.errors?.['required']) { <p>Price is required</p> }
+          </div>
         }
+      </div>
     </div>
 
-    <div class="form-group">
-        <label for="price">Price (in Rs.):</label>
-        <input id="price" type="number" formControlName="price" />
-        @if(price?.invalid && price?.dirty || price?.touched) {
-            <div class="error">
-                @if(price?.errors?.['required']) {
-                    <p>Price is required</p>
-                }
-            </div>
-        }
+    <div class="form-group full-width">
+      <label for="desc">Description</label>
+      <div class="input-container">
+        <span class="input-icon">📝</span>
+        <textarea id="desc" formControlName="desc" placeholder="Describe the product's flavor, texture, and ingredients..." rows="3"></textarea>
+      </div>
+      @if(desc?.invalid && (desc?.dirty || desc?.touched)) {
+        <div class="error-msg">
+          @if(desc?.errors?.['required']) { <p>Description is required</p> }
+        </div>
+      }
     </div>
 
-    
-
-    <div class="form-group">
-        <label for="img">Image URL:</label>
-        <input id="img" type="img" formControlName="img" />
-        @if(img?.invalid && img?.dirty || img?.touched) {
-            <div class="error">
-                @if(img?.errors?.['required']) {
-                    <p>Image URL is required</p>
-                }
-            </div>
-        }
+    <div class="form-group full-width">
+      <label for="img">Image URL</label>
+      <div class="input-container">
+        <span class="input-icon">🖼️</span>
+        <input id="img" type="url" formControlName="img" placeholder="https://example.com/image.jpg" />
+      </div>
+      @if(img?.invalid && (img?.dirty || img?.touched)) {
+        <div class="error-msg">
+          @if(img?.errors?.['required']) { <p>Image URL is required</p> }
+        </div>
+      }
     </div>
-    
 
-    <button type="submit" [disabled]="addProductForm.invalid">Add to Products</button>
-    @if (submissionSuccess){
-    <div class="success">
-        <p>Product added successfully</p>
+    <div class="form-actions">
+      <button type="submit" [disabled]="addProductForm.invalid" class="submit-btn">
+        <span class="btn-text">Add to Store</span>
+        <span class="btn-icon">🚀</span>
+      </button>
     </div>
+
+    @if (submissionSuccess) {
+      <div class="status-popup success">
+        <div class="popup-icon">✅</div>
+        <div class="popup-content">
+          <h4>Success!</h4>
+          <p>Product has been added to the store.</p>
+        </div>
+      </div>
     }
 
-    @if (submissionError){
-        <div class="error">
-            <p>{{submissionError}}</p>
+    @if (submissionError) {
+      <div class="status-popup error">
+        <div class="popup-icon">❌</div>
+        <div class="popup-content">
+          <h4>Error</h4>
+          <p>{{submissionError}}</p>
         </div>
-        }
- 
-</form>
+      </div>
+    }
+  </form>
+</div>

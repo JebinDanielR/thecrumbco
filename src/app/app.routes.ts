@@ -7,19 +7,17 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { ProductsComponent } from './products/products.component';
 import { SignupFormComponent } from './signup-form/signup-form.component';
 import { ChatbotComponent } from './chatbot/chatbot.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
-    {path: '',redirectTo:'thecrumbco',pathMatch:'full'},
-    {path:'thecrumbco',component:HomePageComponent},
-    {path:'thecrumbco/products',component:ProductsComponent},
-    {path:'thecrumbco/cart',component:CartPageComponent},
-    {path:'thecrumbco/checkout',component:CheckoutPageComponent},
-    // { path: '', redirectTo: '/cart', pathMatch: 'full' },
-    {path:'thecrumbco/about',component:AboutPageComponent},
-    {path:'thecrumbco/favorites',component:FavoritesComponent},
+    {path: '', redirectTo: 'thecrumbco/signup', pathMatch: 'full'},
+    {path:'thecrumbco', component:HomePageComponent, canActivate: [authGuard]},
+    {path:'thecrumbco/products',component:ProductsComponent, canActivate: [authGuard]},
+    {path:'thecrumbco/cart',component:CartPageComponent, canActivate: [authGuard]},
+    {path:'thecrumbco/checkout',component:CheckoutPageComponent, canActivate: [authGuard]},
+    {path:'thecrumbco/about',component:AboutPageComponent, canActivate: [authGuard]},
+    {path:'thecrumbco/favorites',component:FavoritesComponent, canActivate: [authGuard]},
     {path:'thecrumbco/signup',component:SignupFormComponent},
-    {path:'thecrumbco/crumbcoassistant',component:ChatbotComponent},
-    // {path:'thecrumbco/cart', loadChildren: () => import('./features/cart/cart.module').then(m => m.CartModule)}
-    {path:'thecrumbco/admin', loadChildren: () => import('./features/admin/admin.module').then(m => m.AdminModule)}
-
+    {path:'thecrumbco/crumbcoassistant',component:ChatbotComponent, canActivate: [authGuard]},
+    {path:'thecrumbco/admin', loadChildren: () => import('./features/admin/admin.module').then(m => m.AdminModule), canActivate: [authGuard]}
 ];
