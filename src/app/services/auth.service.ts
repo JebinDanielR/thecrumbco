@@ -3,11 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, tap, of, map } from 'rxjs';
 import { Customer } from '../models/customer.model';
 
+import { environment } from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:3000/customers';
+  private baseUrl = `${environment.apiUrl}/customers`;
   private loggedInUserKey = 'currentUser';
 
   constructor(private http: HttpClient) {}
