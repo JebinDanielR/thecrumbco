@@ -61,6 +61,17 @@ def item_count_reply(count, category):
     else:
         return f"Here are {count} {plural(cat_label, count)} for you 🍪"
 
+def normalize_query(query):
+    words = query.split()
+    normalized = []
+
+    for word in words:
+        if word.endswith('s') and len(word) > 3:
+            normalized.append(word[:-1])  # cupcakes → cupcake
+        else:
+            normalized.append(word)
+
+    return " ".join(normalized)
 
 def chatbot_response(query):
     # 🔄 Dynamic Load from DB
@@ -76,7 +87,8 @@ def chatbot_response(query):
         print(f"Error loading products: {e}")
         products = []
 
-    query_lower = query.lower().strip()
+    query_lower1 = query.lower().strip()
+    query_lower = normalize_query(query_lower1)
 
     response = {
         "products": [],
