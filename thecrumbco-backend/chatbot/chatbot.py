@@ -36,6 +36,32 @@ BAKERY_JOKES = [
     "Why was the cupcake so happy? Because it was 'frosted' with love! 🧁"
 ]
 
+import difflib
+
+def correct_and_merge(words, vocabulary):
+    corrected = []
+
+    i = 0
+    while i < len(words):
+        word = words[i]
+
+        # Try merging with next word (cup + cake → cupcake)
+        if i < len(words) - 1:
+            merged = word + words[i + 1]
+
+            match = difflib.get_close_matches(merged, vocabulary, n=1, cutoff=0.75)
+            if match:
+                corrected.append(match[0])
+                i += 2
+                continue
+
+        # Otherwise correct single word
+        match = difflib.get_close_matches(word, vocabulary, n=1, cutoff=0.75)
+        corrected.append(match[0] if match else word)
+
+        i += 1
+
+    return corrected
 
 def is_product_query(query):
     return any(kw in query for kw in PRODUCT_KEYS) or bool(re.search(r'\d+', query))
@@ -62,16 +88,24 @@ def item_count_reply(count, category):
         return f"Here are {count} {plural(cat_label, count)} for you 🍪"
 
 def normalize_query(query):
+    query = query.lower().strip()
+
+    # Replace hyphens with space
+    query = query.replace("-", " ")
+
     words = query.split()
     normalized = []
 
     for word in words:
-        if word.endswith('s') and len(word) > 3:
-            normalized.append(word[:-1])  # cupcakes → cupcake
-        else:
-            normalized.append(word)
+        # plural → singular
+        if word.endswith("ies"):
+            word = word[:-3] + "y"
+        elif word.endswith("s") and len(word) > 3:
+            word = word[:-1]
 
-    return " ".join(normalized)
+        normalized.append(word)
+
+    return normalized  # return LIST instead of string
 
 def chatbot_response(query):
     # 🔄 Dynamic Load from DB
@@ -87,8 +121,19 @@ def chatbot_response(query):
         print(f"Error loading products: {e}")
         products = []
 
-    query_lower1 = query.lower().strip()
-    query_lower = normalize_query(query_lower1)
+    words = normalize_query(query)
+
+    # Build vocabulary
+    vocabulary = set()
+    for p in products:
+        w = p["name"].lower().split()
+        vocabulary.update(w)
+        vocabulary.add("".join(w))  # merged words
+
+    # Fix typos + merge words
+    corrected_words = correct_and_merge(words, vocabulary)
+
+    query_lower = " ".join(corrected_words)
 
     response = {
         "products": [],
